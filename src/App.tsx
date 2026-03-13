@@ -19,10 +19,12 @@ import {
 const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5 px-6 py-4">
     <div className="max-w-7xl mx-auto flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        <div className="w-10 h-10 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-lg flex items-center justify-center">
-          <Cpu className="text-white w-6 h-6" />
-        </div>
+      <div className="flex items-center gap-3">
+        <img
+          src="/images/newLogoTestShield.png"
+          alt="Supercomputing Challenge logo"
+          className="w-10 h-10 object-contain"
+        />
         <span className="font-display font-bold text-xl tracking-tighter">SUPERCOMPUTING <span className="text-brand-primary">CHALLENGE</span></span>
       </div>
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
@@ -38,7 +40,18 @@ const Navbar = () => (
 
 const Hero = () => (
   <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-20">
+    {/* Background hero image */}
+    <div className="absolute inset-0 -z-20">
+      <img
+        src="/images/supercomputing-challenge-hero-two.jpg"
+        alt="2023-2024 Finalist Teams – Supercomputing Challenge"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
+    </div>
+
+    {/* Floating gradient accents on top of background */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-30 z-0">
       <div className="absolute top-20 left-10 w-72 h-72 bg-brand-primary rounded-full blur-[120px]" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-accent rounded-full blur-[150px]" />
     </div>
@@ -48,6 +61,7 @@ const Hero = () => (
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
+        className="relative z-20"
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-white/10 text-xs font-semibold text-brand-secondary mb-6">
           <Zap className="w-3 h-3" />
@@ -72,37 +86,8 @@ const Hero = () => (
         </div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9, x: 20 }}
-        animate={{ opacity: 1, scale: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative"
-      >
-        <div className="aspect-[4/3] rounded-3xl overflow-hidden glass p-2">
-          <div className="w-full h-full rounded-2xl overflow-hidden relative">
-            <img 
-              src="https://supercomputingchallenge.org/23-24/images/finalist-teams.jpg" 
-              alt="Supercomputing Challenge Finalists" 
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://picsum.photos/seed/challenge-finalists/800/600";
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6">
-              <div className="flex items-center gap-2 text-xs font-bold text-white/80 mb-1">
-                <Users className="w-3 h-3" />
-                <span>CLASS OF 2024</span>
-              </div>
-              <div className="text-lg font-bold">Celebrating our future innovators</div>
-            </div>
-          </div>
-        </div>
-        {/* Decorative elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-brand-primary/20 rounded-full blur-2xl animate-pulse" />
-        <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-brand-accent/20 rounded-full blur-3xl animate-pulse delay-700" />
-      </motion.div>
+      {/* Empty right column kept for layout spacing on large screens */}
+      <div className="hidden lg:block" />
     </div>
   </section>
 );
@@ -182,10 +167,9 @@ const About = () => (
       <div className="relative">
         <div className="aspect-square rounded-3xl overflow-hidden glass relative group">
           <img 
-            src="https://picsum.photos/seed/computing/800/800" 
-            alt="Computational Science" 
+            src="/images/about-us.png" 
+            alt="Supercomputing Challenge participants" 
             className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
-            referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
           <div className="absolute bottom-8 left-8 right-8">
