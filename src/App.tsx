@@ -1,6 +1,6 @@
-import { motion } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useEffect, useState } from "react";
 import { 
-  Cpu, 
   Users, 
   Calendar, 
   FileText, 
@@ -38,59 +38,102 @@ const Navbar = () => (
   </nav>
 );
 
-const Hero = () => (
-  <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-    {/* Background hero image */}
-    <div className="absolute inset-0 -z-20">
-      <img
-        src="/images/supercomputing-challenge-hero-two.jpg"
-        alt="2023-2024 Finalist Teams – Supercomputing Challenge"
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
-    </div>
+const Hero = () => {
+  const phrases = [
+    "Real-world problem solving through computational science.",
+    "High-performance computing for real-world challenges.",
+    "Preparing New Mexico's future tech workforce.",
+  ];
 
-    {/* Floating gradient accents on top of background */}
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-30 z-0">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-brand-primary rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-accent rounded-full blur-[150px]" />
-    </div>
-    
-    <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-20"
-      >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-white/10 text-xs font-semibold text-brand-secondary mb-6">
-          <Zap className="w-3 h-3" />
-          <span>WELCOME TO THE 36TH ANNUAL</span>
-        </div>
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-[0.9] tracking-tighter">
-          2025-26 <br />
-          <span className="text-gradient">SUPERCOMPUTING</span> <br />
-          CHALLENGE
-        </h1>
-        <p className="text-lg md:text-xl text-white/60 mb-10 leading-relaxed max-w-xl">
-          Real-world problem solving through computational science. Join the most exciting program 
-          offering a unique experience to students in New Mexico.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <button className="btn-primary">
-            Register Now <ArrowRight className="w-4 h-4" />
-          </button>
-          <button className="btn-secondary">
-            Learn More
-          </button>
-        </div>
-      </motion.div>
+  const [phraseIndex, setPhraseIndex] = useState(0);
 
-      {/* Empty right column kept for layout spacing on large screens */}
-      <div className="hidden lg:block" />
-    </div>
-  </section>
-);
+  // Use global page scroll so the effect fully resets when you scroll back to the top
+  const { scrollYProgress } = useScroll();
+  const titleScale = useTransform(scrollYProgress, [0, 0.15], [1, 1.3]);
+  const titleY = useTransform(scrollYProgress, [0, 0.15], [0, -140]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setPhraseIndex((current) => (current + 1) % phrases.length);
+    }, 2500);
+
+    return () => window.clearInterval(id);
+  }, [phrases.length]);
+
+  const currentPhrase = phrases[phraseIndex];
+
+  return (
+    <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      {/* Background hero image */}
+      <div className="absolute inset-0 -z-20">
+        <img
+          src="/images/supercomputing-challenge-hero-two.jpg"
+          alt="2023-2024 Finalist Teams – Supercomputing Challenge"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
+      </div>
+
+      {/* Floating gradient accents on top of background */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full pointer-events-none opacity-30 z-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-brand-primary rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-brand-accent rounded-full blur-[150px]" />
+      </div>
+      
+      <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-20"
+          style={{ scale: titleScale, y: titleY, opacity: titleOpacity }}
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border-white/10 text-xs font-semibold text-brand-secondary mb-6">
+            <Zap className="w-3 h-3" />
+            <span>WELCOME TO THE 36TH ANNUAL</span>
+          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] tracking-tighter">
+            2025-26 <br />
+            <span className="text-gradient animate-gradient-x drop-shadow-[0_0_25px_rgba(255,255,255,0.25)]">
+              SUPERCOMPUTING
+            </span>
+            <br />
+            CHALLENGE
+          </h1>
+          <motion.div
+            className="h-[4px] max-w-sm bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent rounded-full mt-6 mb-10 glow-bar"
+            initial={{ scaleX: 0, opacity: 0, originX: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.9, delay: 0.3 }}
+          />
+          <div className="text-lg md:text-xl text-white/60 mb-10 leading-relaxed max-w-xl">
+            <motion.span
+              key={currentPhrase}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="block font-semibold"
+            >
+              {currentPhrase}
+            </motion.span>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <button className="btn-primary">
+              Register Now <ArrowRight className="w-4 h-4" />
+            </button>
+            <button className="btn-secondary">
+              Learn More
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Empty right column kept for layout spacing on large screens */}
+        <div className="hidden lg:block" />
+      </div>
+    </section>
+  );
+};
 
 const Stats = () => (
   <section className="py-12 px-6 border-y border-white/5">
@@ -260,10 +303,12 @@ const Footer = () => (
   <footer className="py-20 px-6 border-t border-white/5 bg-black">
     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
       <div className="col-span-2">
-        <div className="flex items-center gap-2 mb-6">
-          <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center">
-            <Cpu className="text-white w-5 h-5" />
-          </div>
+        <div className="flex items-center gap-3 mb-6">
+          <img
+            src="/images/newLogoTestShield.png"
+            alt="Supercomputing Challenge logo"
+            className="w-10 h-10 object-contain"
+          />
           <span className="font-display font-bold text-lg tracking-tighter">SUPERCOMPUTING CHALLENGE</span>
         </div>
         <p className="text-white/40 max-w-sm mb-8">
