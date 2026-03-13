@@ -40,7 +40,7 @@ const Navbar = () => (
 
 const Hero = () => {
   const phrases = [
-    "Real-world problem solving through computational science.",
+    "Real-world problem solving at scale.",
     "High-performance computing for real-world challenges.",
     "Preparing New Mexico's future tech workforce.",
   ];
@@ -107,7 +107,7 @@ const Hero = () => {
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.3 }}
           />
-          <div className="text-lg md:text-xl text-white/60 mb-10 leading-relaxed max-w-xl">
+          <div className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-xl">
             <motion.span
               key={currentPhrase}
               initial={{ opacity: 0, y: 8 }}
