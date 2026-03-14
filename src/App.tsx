@@ -19,14 +19,15 @@ import {
 const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5 px-6 py-4">
     <div className="max-w-7xl mx-auto flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <img
-          src="/images/newLogoTestShield.png"
-          alt="Supercomputing Challenge logo"
-          className="w-10 h-10 object-contain"
-        />
-        <span className="font-display font-bold text-xl tracking-tighter">SUPERCOMPUTING <span className="text-brand-primary">CHALLENGE</span></span>
-      </div>
+      <a href="#" className="flex items-center gap-3">
+        <div className="w-10 h-10 flex-shrink-0 overflow-hidden">
+          <img
+            src="/images/SuperComputingLogo.png"
+            alt="Supercomputing Challenge"
+            className="h-10 w-auto object-left object-contain"
+          />
+        </div>
+      </a>
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
         <a href="#" className="hover:text-white transition-colors">About</a>
         <a href="#" className="hover:text-white transition-colors">Register</a>
@@ -66,13 +67,13 @@ const Hero = () => {
   return (
     <section className="relative pt-32 pb-20 px-6 overflow-hidden">
       {/* Background hero image */}
-      <div className="absolute inset-0 -z-20">
+      <div className="absolute inset-0 z-0">
         <img
           src="/images/supercomputing-challenge-hero-two.jpg"
           alt="2023-2024 Finalist Teams – Supercomputing Challenge"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/40 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/90 via-brand-bg/50 to-brand-bg" />
       </div>
 
       {/* Floating gradient accents on top of background */}
@@ -214,7 +215,7 @@ const About = () => (
             alt="Supercomputing Challenge participants" 
             className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-bg/80 via-transparent to-transparent" />
           <div className="absolute bottom-8 left-8 right-8">
             <div className="text-2xl font-bold mb-2">Computational Science</div>
             <p className="text-white/60 text-sm">Empowering the next generation of innovators through high-performance computing.</p>
@@ -300,7 +301,7 @@ const Sponsors = () => {
 };
 
 const Footer = () => (
-  <footer className="py-20 px-6 border-t border-white/5 bg-black">
+  <footer className="py-20 px-6 border-t border-white/5 bg-brand-bg">
     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
       <div className="col-span-2">
         <div className="flex items-center gap-3 mb-6">
@@ -361,7 +362,7 @@ const Footer = () => (
 
 export default function App() {
   return (
-    <div className="min-h-screen selection:bg-brand-primary/30">
+    <div className="min-h-screen bg-brand-bg selection:bg-brand-primary/30">
       <Navbar />
       <main>
         <Hero />
