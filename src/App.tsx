@@ -19,15 +19,15 @@ import {
 const Navbar = () => (
   <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5 px-6 py-4">
     <div className="max-w-7xl mx-auto flex items-center justify-between">
-      <a href="#" className="flex items-center gap-3">
-        <div className="w-10 h-10 flex-shrink-0 overflow-hidden">
-          <img
-            src="/images/SuperComputingLogo.png"
-            alt="Supercomputing Challenge"
-            className="h-10 w-auto object-left object-contain"
-          />
-        </div>
+
+      <a href="#" className="flex items-center">
+        <img
+          src="/images/SuperComputingLogo.png"
+          alt="Supercomputing Challenge"
+          className="h-16 w-auto -my-6 object-contain"
+        />
       </a>
+
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-white/70">
         <a href="#" className="hover:text-white transition-colors">About</a>
         <a href="#" className="hover:text-white transition-colors">Register</a>
@@ -35,6 +35,7 @@ const Navbar = () => (
         <a href="#" className="hover:text-white transition-colors">Archive</a>
         <button className="btn-primary py-2 text-sm">Log In</button>
       </div>
+
     </div>
   </nav>
 );
